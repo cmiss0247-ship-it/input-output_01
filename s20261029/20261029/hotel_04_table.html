@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>續集｜日式燒烤餐廳介紹</title>
+
+    <style>
+        /* 修改 ①：讓 padding 不會額外撐大設定的寬度 */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f7f3ed;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            color: #332820;
+        }
+
+        /* 保留你原本的 Flexbox 排版 */
+        .row {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin: 30px auto;
+            gap: 30px;
+        }
+
+        /* 修改 ②：圖片占據一半空間 */
+        .row img {
+            width: calc((100% - 30px) / 2);
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* 修改 ③：文字區塊占據另一半空間 */
+        .row p {
+            width: calc((100% - 30px) / 2);
+            text-align: center;
+        }
+
+        .row .intro {
+            width: calc((100% - 30px) / 2);
+            text-align: center;
+        }
+
+        /* 修改 ④：第一排介紹文字填滿 intro */
+        .intro p {
+            width: 100%;
+            line-height: 1.8;
+        }
+
+        .intro h2 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
+
+        /* 修改 ⑤：讓第二、三排的餐點名稱更明顯 */
+        .dish {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- 第一排：左圖片、右文字 -->
+    <div class="row">
+        <img src="./images/img03.jpeg" alt="醞炙餐廳">
+
+        <div class="intro">
+           
+            <h2>醞炙</h2>
+            
+            <p>
+                高級百匯餐廳首見炭火直烤，
+                以超高溫鎖住食材精華，
+                表面焦香，內裏多汁。
+                鹽烤出誘人焦香、醬燒進醍醐入味，
+                一起享受炭燒的豪爽食感！
+            </p>
+        </div>
+    </div>
+
+    <!-- 修改 ⑥：第二排改成左文字、右圖片 -->
+    <div class="row">
+        <div class="intro">
+            <h2>炭烤香魚</h2>
+            <p>以炭火慢慢燒烤，讓香魚外皮酥香，保留魚肉的鮮嫩<br>與自然風味。</p>
+        </div>
+
+    <img src="./images/img02.jpeg" alt="炭烤香魚">
+    </div>
+
+    <!-- 第三排：左圖片、右文字 -->
+    <div class="row">
+        
+        <img src="./images/img01.jpeg" alt="炭烤牛舌">
+        <div class="intro">
+            <h2>炭烤牛舌</h2>
+            <p>日式燒烤店必點。經過碳火洗禮的油脂光澤，入口彈牙帶勁的痛快瞬間，讓人直呼「就是為了這個而來的」！</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
