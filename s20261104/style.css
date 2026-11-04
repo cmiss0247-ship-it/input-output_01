@@ -1,0 +1,9 @@
+/* css檔案不需要寫標籤 */
+h3 {
+    color: blueviolet;
+}
+
+p {
+    color: gray;
+    font-size: 18px;
+}
