@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英文單字查詢</title>
+    <style>
+        :root {
+            --bg: #eef2f6;
+            --panel: #ffffff;
+            --ink: #1d2a3a;
+            --muted: #5b6b7d;
+            --accent: #1f4e8c;
+            --line: #c9d3df;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #141a22;
+                --panel: #1d2531;
+                --ink: #e3e9f1;
+                --muted: #9aa8b8;
+                --accent: #6fa3e8;
+                --line: #33404f;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        /* 1- 輸入區 */
+        .container-input {
+            display: flex;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .container-input input[type="text"] {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 18px;
+            border: 2px solid var(--line);
+            border-radius: 6px;
+            background: var(--panel);
+            color: var(--ink);
+        }
+
+        .container-input input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .container-input button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .container-input button:focus-visible {
+            outline: 3px solid var(--ink);
+        }
+
+        /* 2- 輸出區 */
+        .container-output {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .frame-box {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .frame-box header {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line);
+            font-weight: 600;
+        }
+
+        .frame-box header a {
+            color: var(--accent);
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .frame-box iframe {
+            width: 100%;
+            height: 75vh;
+            border: none;
+            background: #fff;
+        }
+
+        @media (max-width: 800px) {
+            .container-output {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <form class="container-input" id="searchForm">
+        <input type="text" id="word" placeholder="輸入英文單字，例如 serendipity" required pattern="[A-Za-z\s\-']+" title="請輸入英文單字">
+        <button type="submit">查詢單字</button>
+
+    </form>
+
+    <div class="container-output">
+        <div class="frame-box">
+            <header>
+                <span>美國字典</span>
+                <a id="like1" href="#" target="_blank" rel="noopener">新分頁開啟</a>
+            </header>
+            <iframe id="iframe1" title="Merriam-Webster" frameborder="0"></iframe>
+
+
+        </div>
+        <div class="frame-box">
+            <header>
+                <span>Wiktionary</span>
+                <a id="link2" href="#"
+                target="_blank"
+                rel="noopener">新分頁開啟</a>
+                
+            </header>
+            <iframe id="iframe2" title="Wiktionary"></iframe>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const word = document.getElementById('word').value.trim();
+            if (!word) return;
+            const q = encodeURIComponent(word);
+
+            // 字典網址（可自行替換）
+            const url1 = 'https://www.ahdictionary.com/word/search.html?q=' + q;
+            const url2 = 'https://en.m.wiktionary.org/wiki/' + q;
+
+            document.getElementById('iframe1').src = url1;
+            document.getElementById('iframe2').src = url2;
+            document.getElementById('link1').href = url1;
+            document.getElementById('link2').href = url2;
+        });
+
+
+
+
+
+    </script>
+        
+
+
+
+
+
+
+    
+</body>
+</html>

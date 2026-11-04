@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生活用品美學</title>
+
+    <style>
+        /* 整個網頁 */
+        body {
+            margin: 0;
+            background-color: #f8f5fa;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+
+        /* 表格設定 */
+        table {
+            width: 80%;
+            margin: auto;
+            table-layout: fixed;
+            border-spacing: 3px;
+        }
+
+        td {
+            height: 300px;
+            padding: 0;
+        }
+
+        /* 每個格子裡面的盒子 */
+        .box {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        /* 圖片設定：保持比例並填滿格子 */
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* 各格子的背景顏色 */
+        .box1 {
+            background-color: aliceblue;
+        }
+
+        .box2-1 {
+            background-color: rgb(167, 154, 214);
+        }
+
+        .box2-2 {
+            background-color: aqua;
+        }
+
+        .box3-1 {
+            background-color: aquamarine;
+        }
+
+        .box3-2 {
+            background-color: rgb(150, 113, 177);
+        }
+
+        .box3-3 {
+            background-color: beige;
+        }
+
+        .box4-1 {
+            background-color: black;
+            color: white;
+        }
+
+        .box4-2 {
+            background-color: blanchedalmond;
+        }
+
+        .box4-3 {
+            background-color: blue;
+        }
+
+        .box4-4 {
+            background-color: rgb(110, 89, 131);
+            color: white;
+        }
+
+        /* 文字區塊：上下左右置中 */
+        .text-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 15px;
+        }
+
+        /* 文字標題 */
+        .text-box h2 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin: 0 0 15px;
+        }
+
+        /* 文字內容 */
+        .text-box p {
+            font-size: 15px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* 第四排比較窄，字體縮小 */
+        .box4-1 h2,
+        .box4-4 h2 {
+            font-size: 20px;
+        }
+
+        .box4-1 p,
+        .box4-4 p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 第一排：主視覺圖片 -->
+    <table>
+        <tr>
+            <td>
+                <div class="box box1">
+                    <img src="./images/imd0.png" alt="紫色生活美學">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 第二排：左邊文字、右邊耳機 -->
+    <table>
+        <tr>
+            <td width="50%">
+                <div class="box box2-1 text-box">
+                    <h2>音樂・靜心</h2>
+                    <p>
+                        在喜歡的旋律裡，<br>
+                        讓日常慢下來。
+                    </p>
+                </div>
+            </td>
+
+            <td width="50%">
+                <div class="box box2-2">
+                    <img src="./images/01_headphones.png" alt="耳機">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 第三排：貓咪、文字、香水 -->
+    <table>
+        <tr>
+            <td width="33.33%">
+                <div class="box box3-1">
+                    <img src="./images/02_cat.png" alt="貓咪">
+                </div>
+            </td>
+
+            <td width="33.33%">
+                <div class="box box3-2 text-box">
+                    <h2>香氣・生活</h2>
+                    <p>
+                        用喜歡的香氣，<br>
+                        為平凡的日子增添優雅。
+                    </p>
+                </div>
+            </td>
+
+            <td width="33.33%">
+                <div class="box box3-3">
+                    <img src="./images/03_perfume.png" alt="香水">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 第四排：文字、書本、手機、文字 -->
+    <table>
+        <tr>
+            <td width="25%">
+                <div class="box box4-1 text-box">
+                    <h2>閱讀・成長</h2>
+                    <p>
+                        在文字裡旅行，<br>
+                        遇見更寬闊的世界。
+                    </p>
+                </div>
+            </td>
+
+            <td width="25%">
+                <div class="box box4-2">
+                    <img src="./images/04_books.png" alt="書本">
+                </div>
+            </td>
+
+            <td width="25%">
+                <div class="box box4-3">
+                    <img src="./images/05_phone.png" alt="紫色手機">
+                </div>
+            </td>
+
+            <td width="25%">
+                <div class="box box4-4 text-box">
+                    <h2>生活的美學</h2>
+                    <p>
+                        從日常的小細節開始，<br>
+                        打造屬於自己的優雅。
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
