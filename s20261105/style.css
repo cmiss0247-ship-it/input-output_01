@@ -1,0 +1,145 @@
+header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+body {
+    background-color: #17121f;
+    color: #ead5ff;
+}
+
+.products-card img {
+    width: 200px;
+}
+
+.price::before {
+    content: "NT$";
+}
+
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.products-card {
+    background-color: #2c213b;
+    border: 1px solid #67497e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.products-card:hover {
+    background-color: #49315f;
+}
+
+.shop-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.shop-table th,
+.shop-table td {
+    border: 1px solid #67497e;
+    /*讓相鄰格子的邊框合併，不要出現雙線*/
+    padding: 12px;
+    text-align: center;
+    /*文字置中*/
+}
+
+/* 購物表格與商品區的間距 */
+.shop-table {
+    margin-top: 30px;
+}
+
+/* 結帳區 */
+.checkout {
+    background-color: #2c213b;
+    border: 1px solid #67497e;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* 扭蛋區 */
+.gacha {
+    background-color: #352244;
+    border: 2px dashed #b68be2;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* 扭蛋機圖示 */
+.gacha-machine {
+    font-size: 90px;
+    margin: 20px;
+    animation: float 2s ease-in-out infinite;
+}
+
+/* 按鈕 */
+.gacha button {
+    background-color: #a46bd1;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 25px;
+    cursor: pointer;
+}
+
+/* 滑鼠移入 */
+.gacha button:hover {
+    background-color: #d28cf5;
+}
+
+/* 上下漂浮動畫 */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* 中央商店容器 */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+
+    background-color: rgba(23, 18, 31, 0.88);
+    border: 2px solid #8e65ad;
+    border-radius: 24px;
+    box-shadow: 0 0 40px rgba(158, 91, 213, 0.35);
+
+    position: relative;
+    z-index: 1;
+}
+
+/* 手機也能正常瀏覽 */
+@media (max-width: 650px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .products-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+body {
+    background-image: url("./images  kuromi/witch_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

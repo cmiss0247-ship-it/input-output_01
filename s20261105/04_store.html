@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid greenyellow;
+        }
+
+        td>img {
+            width: 150px;
+            height: 150px;
+        }
+
+        td>input {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="15%">商品</th>
+            <th width="10%">價格</th>
+            <th width="10%">數量</th>
+            <th width="">小計</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <img src="./images/p1.jpg" alt="">
+                <br>
+                漂浮哈密瓜蘇打
+            </td>
+            <td><span id="priceNum1">100</span></td>
+            <td>
+                <input type="number" name="" id="countNum1">
+            </td>
+            <td>
+                <span id="totalNum1">100</span>
+            </td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <img src="./images/p2.jpg" alt="">
+                <br>
+                漂浮草莓蘇打
+            </td>
+            <td id="priceNum2">200</td>
+            <td>
+                <input type="number" name="" id="countNum2">
+            </td>
+            <td>
+                <span id="totalNum2">100</span>
+            </td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <img src="./images/p3.jpg" alt="">
+                <br>
+                鮮榨檸檬蘇打
+            </td>
+            <td id="priceNum3">100</td>
+            <td>
+                <input type="number" name="" id="countNum3">
+            </td>
+            <td>
+                <span id="totalNum3">100</span>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                總計: <span id="resultSpan">100</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 
+        以上HTML 增加以下功能 在同一個頁面顯示 JS
+
+        使用者change
+        ID countNum1,  countNum2 ,  countNum 3
+        更改totalNum1,totalNum2,totalNum3
+
+        totoalNum1 = priceNum1 * countNum1;
+        totoalNum2 = priceNum2 * countNum2;
+        totoalNum3 = priceNum3 * countNum3;
+
+        resultSpan = totoalNum1 + totoalNum2 + totoalNum3
+        如果resultSpan 大於等於 800 顯示原價與打8折後價格
+     -->
+</body>
+
+</html>

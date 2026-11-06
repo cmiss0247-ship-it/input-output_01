@@ -1,0 +1,21 @@
+
+body {
+    background-color: #fff4f8;
+    text-align: center;
+}
+
+.machine {
+    width: 400px;
+    height: 500px;
+    background-color: #f5a9c7;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.window {
+    height: 350px;
+    background-color: #ffffff;
+    border: 5px solid #ffffff;
+    border-radius: 15px;
+}

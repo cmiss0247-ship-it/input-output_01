@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUROMI'S WITCH LAB</title>
+    <link rel="stylesheet" href="./style.css">
+
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+    <header>
+        <h1>🔮KUROMI'S WITCH LAB🔮</h1>
+        <p>庫洛米😈午夜魔藥研究所</p>
+        <p>歡迎光臨!想調製什麼魔法?</p>
+    </header>
+
+    <section class="products">
+        <h2>魔藥商品區</h2>
+
+        <div class="products-list">
+
+            <div class="products-card">
+                <img src="./images  kuromi/heart_potion.png" alt="魅惑之心魔藥">
+                <h3>魅惑之心💜</h3>
+                <p>讓你勇敢說出心裡的秘密。</p>
+                <p class="price">150</p>
+            </div>
+
+            <div class="products-card">
+                <img src="./images  kuromi/moon_potion.png" alt="月蝕魔藥">
+                <h3>月蝕魔藥💜</h3>
+                <p>收集月光，讓夢境變得更加神祕。</p>
+                <p class="price">200</p>
+            </div>
+
+            <div class="products-card">
+                <img src="./images  kuromi/lucky_potion.png" alt="幸運巫師">
+                <h3>幸運巫師💜</h3>
+                <p>今天的幸運，交給魔法決定！</p>
+                <p class="price">120</p>
+            </div>
+
+            <div class="products-card">
+                <img src="./images  kuromi/mystery_potion.png" alt="神祕魔法藥水">
+                <h3>神祕魔法藥水💜</h3>
+                <p>沒有人知道喝下它會發生什麼事。</p>
+                <p class="price">180</p>
+            </div>
+
+        </div>
+
+
+    </section>
+    <table class="shop-table">
+        <tr>
+            <th>魔藥名稱</th>
+            <th>單價</th>
+            <th>購買數量</th>
+            <th>小計</th>
+        </tr>
+
+        <tr>
+            <td>魅惑之心</td>
+            <td>150</td>
+            <td>
+                <input type="number" id="countNum1" min="0" value="0">
+            </td>
+            <td id="totalNum1">0</td>
+        </tr>
+
+        <tr>
+            <td>月蝕魔藥</td>
+            <td>200</td>
+            <td>
+                <input type="number" id="countNum2" min="0" value="0">
+            </td>
+            <td id="totalNum2">0</td>
+        </tr>
+
+        <tr>
+            <td>幸運巫師</td>
+            <td>120</td>
+            <td>
+                <input type="number" id="countNum3" min="0" value="0">
+            </td>
+            <td id="totalNum3">0</td>
+        </tr>
+
+        <tr>
+            <td>神祕魔法藥水</td>
+            <td>180</td>
+            <td>
+                <input type="number" id="countNum4" min="0" value="0">
+            </td>
+            <td id="totalNum4">0</td>
+        </tr>
+
+    </table>
+
+    <div class="checkout">
+        <h2>🛒 巫師的購物結算</h2>
+        <p>原價總金額：NT$ <span id="resultSpan">0</span></p>
+        <p id="discountMessage">滿 NT$ 800 享午夜魔法八折優惠！</p>
+        <p>實付金額：NT$ <span id="finalPrice">0</span></p>
+    </div>
+
+    <section class="gacha">
+        <h2>🎰 庫洛米的神祕扭蛋機</h2>
+        <p>支付 100 魔法幣，隨機獲得一款魔藥！</p>
+        <div class="gacha-machine">🔮</div>
+        <button type="button" id="drawButton">✨ 抽取神祕魔藥 ✨</button>
+        <p id="gachaResult">你的命運會是哪一瓶魔藥呢？</p>
+    </section>
+
+        </div> <!-- 整個商店容器到這裡才結束 -->
+
+    <script>
+        // 四款魔藥的單價
+        const prices = [150, 200, 120, 180];
+
+        function calculateTotal() {
+            let total = 0;
+
+            // 依序計算四款商品
+            for (let i = 1; i <= 4; i++) {
+
+                // 取得使用者輸入的數量
+                let count = Number(document.getElementById("countNum" + i).value);
+
+                // 不允許負數或無效數量
+                count = Math.max(0, Math.floor(count));
+
+                // 單價 × 數量 = 小計
+                let subtotal = prices[i - 1] * count;
+
+                // 把小計顯示在表格
+                document.getElementById("totalNum" + i).textContent = subtotal;
+
+                // 累加總金額
+                total += subtotal;
+            }
+
+            // 顯示原價
+            document.getElementById("resultSpan").textContent = total;
+
+            // 滿800元打八折
+            let finalPrice = total >= 800 ? total * 0.8 : total;
+
+            document.getElementById("finalPrice").textContent = finalPrice;
+
+            document.getElementById("discountMessage").textContent =
+                total >= 800
+                    ? "✨ 恭喜！庫洛米施展了八折魔法！"
+                    : "滿 NT$ 800 享午夜魔法八折優惠！";
+        }
+
+        // 使用者修改數量時重新計算
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById("countNum" + i)
+                .addEventListener("input", calculateTotal);
+        }
+
+        calculateTotal();
+
+        // 扭蛋機的四種獎品
+        const potions = [
+            "💜 魅惑之心",
+            "🌙 月蝕魔藥",
+            "🍀 幸運巫師",
+            "🔮 神祕魔法藥水"
+        ];
+
+        // 點擊按鈕抽獎
+        document.getElementById("drawButton").addEventListener("click", function () {
+
+            // 隨機產生 0～3 的整數
+            let randomNumber = Math.floor(Math.random() * potions.length);
+
+            // 顯示抽中的魔藥
+            document.getElementById("gachaResult").textContent =
+                "🎉 恭喜抽中：" + potions[randomNumber] + "！";
+        });
+
+    </script>
+
+</body>
+
+</html>

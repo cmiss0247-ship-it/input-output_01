@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車</title>
+    <style>
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid greenyellow;
+        }
+
+        td>img {
+            width: 150px;
+            height: 150px;
+        }
+
+        td>input {
+            width: 50px;
+        }
+
+        #discountInfo {
+            color: #dc2626;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="15%">商品</th>
+            <th width="10%">價格</th>
+            <th width="10%">數量</th>
+            <th width="">小計</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <img src="./images/p1.jpg" alt="">
+                <br>
+                漂浮哈密瓜蘇打
+            </td>
+            <td><span id="priceNum1">100</span></td>
+            <td>
+                <input type="number" min="0" value="0" name="" id="countNum1">
+            </td>
+            <td>
+                <span id="totalNum1">0</span>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>
+                <img src="./images/p2.jpg" alt="">
+                <br>
+                漂浮草莓蘇打
+            </td>
+            <td id="priceNum2">200</td>
+            <td>
+                <input type="number" min="0" value="0" name="" id="countNum2">
+            </td>
+            <td>
+                <span id="totalNum2">0</span>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>
+                <img src="./images/p3.jpg" alt="">
+                <br>
+                鮮榨檸檬蘇打
+            </td>
+            <td id="priceNum3">100</td>
+            <td>
+                <input type="number" min="0" value="0" name="" id="countNum3">
+            </td>
+            <td>
+                <span id="totalNum3">0</span>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                總計: <span id="resultSpan">0</span>
+                <div id="discountInfo"></div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // 取得各商品的元素
+        const products = [1, 2, 3].map(i => ({
+            price: document.getElementById(`priceNum${i}`),
+            count: document.getElementById(`countNum${i}`),
+            total: document.getElementById(`totalNum${i}`)
+        }));
+
+        const resultSpan = document.getElementById("resultSpan");
+        const discountInfo = document.getElementById("discountInfo");
+
+        function calculate() {
+            let sum = 0;
+
+            // 計算每個商品的小計並加總
+            products.forEach(p => {
+                const price = Number(p.price.textContent);
+                const count = Number(p.count.value) || 0;
+                const subtotal = price * count;
+
+                p.total.textContent = subtotal;
+                sum += subtotal;
+            });
+
+            resultSpan.textContent = sum;
+
+            // 滿 800 元顯示原價與 8 折價格
+            if (sum >= 800) {
+                const discounted = Math.round(sum * 0.8);
+                discountInfo.textContent = `原價 ${sum} 元,打 8 折後 ${discounted} 元`;
+            } else {
+                discountInfo.textContent = "";
+            }
+        }
+
+        // 每個數量輸入框變動時重新計算
+        products.forEach(p => {
+            p.count.addEventListener("change", calculate);
+        });
+
+        // 頁面載入時先計算一次,讓初始狀態正確
+        calculate();
+    </script>
+</body>
+
+</html>
