@@ -1,11 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>首頁 - 今天不想回地球</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B0B0E;
+            --text: #EDEBE3;
+            --line: #3A3A44;
+            --purple: #7A4DFF;
+            --lavender: #C9B3FF;
+            --pink: #FF2E7E;
+            --lime: #C8FF2E;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Outfit", "Microsoft JhengHei", sans-serif;
+        }
+
+        .page {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 32px 56px 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== 頁首 ===== */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand-en {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .slash {
+            color: var(--pink);
+            font-size: 36px;
+            font-weight: 300;
+        }
+
+        .brand-zh {
+            font-size: 24px;
+            letter-spacing: 6px;
+        }
+
+        /* ===== 主要區塊 ===== */
+        .main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 56px;
+            padding: 50px 0;
+            align-items: center;
+        }
+
+        .eyebrow {
+            font-size: 15px;
+            letter-spacing: 6px;
+            color: var(--lavender);
+            margin: 0 0 16px;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -3px;
+        }
+
+        h1 span {
+            color: var(--purple);
+        }
+
+        .lead {
+            margin: 0 0 44px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #B9B7AF;
+            letter-spacing: 1px;
+        }
+
+        /* 目錄標題 */
+        .nav-title {
+            margin: 18px 0 0;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 4px;
+        }
+
+        .nav-title span {
+            margin-left: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--pink);
+        }
+
+        /* 選單：像日曆格子一樣的線條 */
+        nav {
+            border-top: 1px solid var(--line);
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 8px;
+            border-bottom: 1px solid var(--line);
+            color: var(--text);
+            text-decoration: none;
+            transition: background .2s, padding .2s;
+        }
+
+        nav .num {
+            font-size: 16px;
+            color: var(--lavender);
+            width: 32px;
+        }
+
+        nav .label {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        nav .en {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: #8A8892;
+        }
+
+        nav .go {
+            margin-left: auto;
+            font-size: 24px;
+            transition: transform .2s;
+        }
+
+        nav a:hover {
+            background: var(--purple);
+            padding-left: 24px;
+        }
+
+        nav a:hover .num,
+        nav a:hover .en {
+            color: var(--text);
+        }
+
+        nav a:hover .go {
+            transform: translateX(6px);
+        }
+
+        /* 右邊圖片：把上方的月份英文字裁掉 */
+        .cover {
+            border: 1px solid var(--line);
+            aspect-ratio: 1 / 0.85;
+            overflow: hidden;
+        }
+
+        .cover img {
+            display: block;
+            width: 100%;
+            margin-top: -15%;
+        }
+
+        /* ===== 頁尾 ===== */
+        .footer {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid var(--line);
+            padding: 24px 0 36px;
+            font-size: 15px;
+            letter-spacing: 5px;
+            gap: 20px;
+        }
+
+        .footer .slash {
+            font-size: 18px;
+        }
+
+        .footer .slash:last-child {
+            margin-left: auto;
+        }
+
+        /* ===== 平板 / 手機 ===== */
+        @media (max-width: 1000px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+
+            .cover {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                padding: 20px 16px;
+            }
+
+            .brand-en {
+                font-size: 28px;
+            }
+
+            .brand-zh {
+                font-size: 16px;
+                letter-spacing: 3px;
+            }
+
+            h1 {
+                font-size: 72px;
+            }
+
+            nav .label {
+                font-size: 22px;
+            }
+
+            nav .en {
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="page">
+        <header class="brand">
+            <span class="brand-en">NO EARTH TODAY</span>
+            <span class="slash">/</span>
+            <span class="brand-zh">今天不想回地球</span>
+        </header>
+
+        <main class="main">
+            <section>
+                <p class="eyebrow">HOME PRACTICE · HW2</p>
+                <h1>HELLO<br><span>MOON.</span></h1>
+                <p class="lead">今天不想回地球，選一個入口開始吧。</p>
+
+                <nav>
+                    <a href="calendar_new.php">
+                        <span class="num">01</span>
+                        <span class="label">紫月軌道</span>
+                        <span class="en">LUNAR ORBIT</span>
+                        <span class="go">&#10095;</span>
+                    </a>
+                    <a href="calendar_dark.php">
+                        <span class="num">02</span>
+                        <span class="label">月汐紀</span>
+                        <span class="en">LUNAR TIDES</span>
+                        <span class="go">&#10095;</span>
+                    </a>
+                    <a href="login.html">
+                        <span class="num">03</span>
+                        <span class="label">登入頁面</span>
+                        <span class="en">LOGIN</span>
+                        <span class="go">&#10095;</span>
+                    </a>
+                </nav>
+                <h2 class="nav-title">PHP 網頁練習 <span>/ PRACTICE INDEX</span></h2>
+            </section>
+
+            <div class="cover">
+                <img src="images/month/C_01.png" alt="紫色水晶與月亮">
+            </div>
+        </main>
+
+        <footer class="footer">
+            <span>NO EARTH TODAY</span>
+            <span class="slash">/</span>
+            <span>今天不想回地球</span>
+            <span class="slash">/</span>
+        </footer>
+    </div>
 </body>
+
 </html>

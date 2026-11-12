@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入頁面 - 登月請排隊</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B0B0E;
+            --text: #EDEBE3;
+            --line: #3A3A44;
+            --purple: #7A4DFF;
+            --lavender: #C9B3FF;
+            --pink: #FF2E7E;
+            --lime: #C8FF2E;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Outfit", "Microsoft JhengHei", sans-serif;
+            display: grid;
+            grid-template-columns: minmax(380px, 1fr) minmax(0, 1.2fr);
+        }
+
+        /* ===== 左邊：表單 ===== */
+        .panel {
+            display: flex;
+            flex-direction: column;
+            padding: 32px 56px;
+            min-height: 100vh;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .brand-en {
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .slash {
+            color: var(--pink);
+            font-size: 24px;
+        }
+
+        .brand-zh {
+            font-size: 16px;
+            letter-spacing: 5px;
+        }
+
+        .box {
+            margin: auto 0;
+            width: 100%;
+            max-width: 520px;
+            padding: 40px 0;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            font-size: 16px;
+            letter-spacing: 6px;
+            color: var(--lavender);
+        }
+
+        h1 {
+            margin: 0 0 36px;
+            font-size: 112px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -2px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #A9A7B0;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 26px;
+            padding: 18px 20px;
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--text);
+            font: 19px "Outfit", "Microsoft JhengHei", sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 1px var(--purple);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 6px;
+            padding: 20px;
+            background: var(--purple);
+            color: var(--text);
+            border: none;
+            font: 600 20px "Outfit", "Microsoft JhengHei", sans-serif;
+            letter-spacing: 6px;
+            cursor: pointer;
+            transition: background .15s, color .15s;
+        }
+
+        button:hover {
+            background: var(--lime);
+            color: var(--bg);
+        }
+
+        .hint {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            font-size: 17px;
+            color: #A9A7B0;
+        }
+
+        .hint strong {
+            color: var(--lime);
+        }
+
+        .back {
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #8A8892;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: var(--pink);
+        }
+
+        /* ===== 右邊：圖片（裁掉上方月份英文字） ===== */
+        .art {
+            position: relative;
+            overflow: hidden;
+            border-left: 1px solid var(--line);
+            background: url("images/month/C_12.png") center bottom / max(100%, 118vh) no-repeat;
+        }
+
+        /* 左側漸層，讓圖片和表單自然銜接 */
+        .art::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--bg) 0%, transparent 25%);
+        }
+
+        /* ===== 平板 / 手機：圖片變成頁面上方的橫幅，不會蓋到表單 ===== */
+        @media (max-width: 900px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-rows: 220px auto;
+            }
+
+            .art {
+                order: -1;
+                border-left: none;
+                border-bottom: 1px solid var(--line);
+                background-size: max(100%, 260px);
+            }
+
+            .art::before {
+                background: linear-gradient(0deg, var(--bg) 0%, transparent 40%);
+            }
+
+            .panel {
+                min-height: 0;
+                padding: 24px 16px;
+            }
+
+            .box {
+                margin: 0 auto;
+            }
+
+            h1 {
+                font-size: 64px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <a class="brand" href="index.html">
+            <span class="brand-en">QUEUE FOR THE MOON</span>
+            <span class="slash">/</span>
+            <span class="brand-zh">登月請排隊</span>
+        </a>
+
+        <div class="box">
+            <p class="eyebrow">MEMBER</p>
+            <h1>LOGIN</h1>
+            <form action="api/chk_login.php" method="post">
+                <label for="acc">帳號</label>
+                <input type="text" id="acc" name="acc" placeholder="請輸入帳號" autocomplete="username" required>
+                <label for="pw">密碼</label>
+                <input type="password" id="pw" name="pw" placeholder="請輸入密碼" autocomplete="current-password" required>
+                <button type="submit">申請登陸</button>
+            </form>
+            <p class="hint">測試帳號 <strong>Admin</strong>　密碼 <strong>0857</strong></p>
+        </div>
+
+        <a class="back" href="index.html">&#10094; 回首頁</a>
+    </div>
+
+    <div class="art" aria-hidden="true"></div>
+</body>
+
+</html>

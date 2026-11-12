@@ -1,0 +1,561 @@
+/* ===== 月汐紀 LUNAR TIDES：月相萬年曆 ===== */
+
+:root {
+    --bg: #0C0A14;
+    --panel: #14111F;
+    --text: #ECE6F5;
+    --muted: #A49CB8;
+    --line: #3B3450;
+    --line-soft: #2A2438;
+    --lilac: #C9B6F0;
+    --lilac-bg: #3A2E55;
+    --serif-en: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+    --serif-zh: "Noto Serif TC", "PMingLiU", serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: var(--serif-zh);
+    /* 讓 Cormorant 的數字一樣高（預設是高低不齊的舊式數字） */
+    font-variant-numeric: lining-nums;
+    /* 星空：幾層小亮點 + 微微的紫色光暈 */
+    background:
+        radial-gradient(1px 1px at 12% 18%, #fff8 50%, transparent 51%),
+        radial-gradient(1px 1px at 78% 8%, #fff6 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 92% 42%, #fff7 50%, transparent 51%),
+        radial-gradient(1px 1px at 35% 85%, #fff5 50%, transparent 51%),
+        radial-gradient(1px 1px at 60% 60%, #fff4 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 4% 70%, #fff6 50%, transparent 51%),
+        radial-gradient(ellipse at 85% 0%, #2A2140 0%, transparent 55%),
+        var(--bg);
+    background-attachment: fixed;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.page {
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 24px 40px 40px;
+}
+
+/* ===== 頁首 ===== */
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.star {
+    font-size: 26px;
+    color: var(--lilac);
+}
+
+.brand-en {
+    font-family: var(--serif-en);
+    font-size: 46px;
+    letter-spacing: 6px;
+}
+
+.brand-sep {
+    width: 1px;
+    height: 40px;
+    background: var(--muted);
+}
+
+.brand-zh {
+    font-size: 40px;
+    letter-spacing: 6px;
+}
+
+.menu {
+    display: flex;
+    gap: 56px;
+}
+
+.menu a {
+    font-size: 21px;
+    letter-spacing: 3px;
+    padding: 6px 4px 10px;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    transition: color .2s, border-color .2s;
+}
+
+.menu a:hover {
+    color: var(--text);
+}
+
+.menu a.active {
+    color: var(--lilac);
+    border-bottom-color: var(--lilac);
+}
+
+/* ===== 左右兩欄 ===== */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    gap: 40px;
+    padding-top: 28px;
+}
+
+/* ===== 標題列 ===== */
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.ym {
+    font-family: var(--serif-en);
+    font-size: 64px;
+    line-height: 1;
+}
+
+.title-sep {
+    width: 1px;
+    height: 52px;
+    background: var(--muted);
+}
+
+.en {
+    font-family: var(--serif-en);
+    font-size: 34px;
+    letter-spacing: 5px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.controls form {
+    display: flex;
+    gap: 12px;
+}
+
+.btn,
+.controls select {
+    height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--text);
+    font: 18px var(--serif-zh);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s, background .2s;
+}
+
+.btn:hover,
+.controls select:hover {
+    border-color: var(--lilac);
+}
+
+.btn.icon {
+    width: 46px;
+    font-size: 18px;
+}
+
+.btn.disabled {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.controls select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0 40px 0 18px;
+    cursor: pointer;
+    background: var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ECE6F5' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 14px center;
+}
+
+.controls select option {
+    background: var(--panel);
+}
+
+.today-btn {
+    padding: 0 28px;
+    background: var(--lilac-bg);
+    border-color: #6E5C96;
+    letter-spacing: 4px;
+}
+
+/* ===== 日曆格子 ===== */
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid var(--line);
+}
+
+.calendar th {
+    height: 54px;
+    font-size: 24px;
+    font-weight: 400;
+    background: #1C1729;
+    border: 1px solid var(--line);
+}
+
+.calendar td {
+    height: 136px;
+    padding: 0;
+    border: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.calendar td a {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 136px;
+    transition: background .2s;
+}
+
+.calendar td a:hover {
+    background: #1B1628;
+}
+
+.day-number {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-family: var(--serif-en);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+    z-index: 1;
+}
+
+.calendar td img {
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    width: 112px;
+    height: 112px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* 今天：淡紫底 + 亮框 */
+.calendar td.today a {
+    background: var(--lilac-bg);
+    outline: 2px solid var(--lilac);
+    outline-offset: -2px;
+}
+
+/* 點選的日期（不是今天時）：細框 */
+.calendar td.selected:not(.today) a {
+    outline: 1px dashed var(--lilac);
+    outline-offset: -4px;
+}
+
+/* ===== 月相圖例 ===== */
+.legend {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border-left: 1px solid var(--line-soft);
+}
+
+.legend-item:first-child {
+    border-left: none;
+}
+
+.legend-item img {
+    width: 104px;
+    height: 104px;
+}
+
+.legend-item span {
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.note {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 2px;
+}
+
+/* ===== 右側：所選日期 ===== */
+.side {
+    border-left: 1px solid var(--line);
+    padding: 10px 0 0 36px;
+    text-align: center;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+
+.side-label {
+    margin: 10px 0 8px;
+    font-size: 24px;
+    letter-spacing: 4px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+}
+
+/* 標題兩側的細線 */
+.side-label::before,
+.side-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+.side-label span {
+    color: var(--lilac);
+    font-size: 16px;
+}
+
+.side-date {
+    margin: 0;
+    font-family: var(--serif-en);
+    font-size: 64px;
+    letter-spacing: 1px;
+}
+
+.side-moon {
+    display: block;
+    width: calc(100% + 40px);
+    max-width: none;
+    margin: 0 -20px;
+    filter: drop-shadow(0 0 30px #7A5CC433);
+}
+
+.side-phase {
+    margin: 0 0 12px;
+    font-size: 54px;
+    letter-spacing: 10px;
+    font-weight: 500;
+}
+
+.side-pill {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+.side-pill::before,
+.side-pill::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+.side-today {
+    margin: 18px 0 0;
+    color: var(--lilac);
+    font-size: 17px;
+    letter-spacing: 4px;
+}
+
+/* ===== 平板 ===== */
+@media (max-width: 1200px) {
+    .layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .side {
+        position: static;
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding: 24px 0 0;
+    }
+
+    .side-moon {
+        max-width: 260px;
+    }
+}
+
+/* ===== 手機 ===== */
+@media (max-width: 700px) {
+    .page {
+        padding: 16px;
+    }
+
+    .brand-en {
+        font-size: 28px;
+        letter-spacing: 3px;
+    }
+
+    .brand-zh {
+        font-size: 24px;
+    }
+
+    .brand-sep {
+        height: 26px;
+    }
+
+    .menu {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .menu a {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    .ym {
+        font-size: 40px;
+    }
+
+    .en {
+        font-size: 20px;
+    }
+
+    .title-sep {
+        height: 32px;
+    }
+
+    .controls,
+    .controls form {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .btn,
+    .controls select {
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .controls select {
+        padding: 0 30px 0 10px;
+        background-position: right 10px center;
+    }
+
+    .today-btn {
+        padding: 0 14px;
+    }
+
+    .calendar th {
+        height: 40px;
+        font-size: 17px;
+    }
+
+    .calendar td,
+    .calendar td a {
+        height: 70px;
+        min-height: 70px;
+    }
+
+    .day-number {
+        top: 5px;
+        left: 6px;
+        font-size: 17px;
+    }
+
+    .calendar td img {
+        width: 46px;
+        height: 46px;
+        top: 60%;
+    }
+
+    .legend {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        row-gap: 18px;
+    }
+
+    .legend-item:nth-child(5) {
+        border-left: none;
+    }
+
+    .legend-item img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .legend-item span {
+        font-size: 16px;
+    }
+
+    .side-date {
+        font-size: 44px;
+    }
+
+    .side-phase {
+        font-size: 40px;
+    }
+}
+
+/* ===== Cookie 說話泡泡：配合月汐紀風格 =====
+   cookie_pet.css 是第一版、第二版共用的，
+   這裡用 body 提高優先權，只覆蓋第二版的泡泡，不影響第一版 */
+body .cookie-speech {
+    min-width: 140px;
+    max-width: 220px;
+    padding: 10px 16px;
+    background: rgba(20, 17, 31, 0.92);
+    color: var(--text);
+    border: 1px solid var(--lilac);
+    border-radius: 12px;
+    font-family: var(--serif-zh);
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    box-shadow: 0 0 18px rgba(201, 182, 240, 0.25), 0 6px 16px #0009;
+}
+
+/* 開頭加一顆小星星 */
+body .cookie-speech::before {
+    content: "✦ ";
+    color: var(--lilac);
+}
+
+/* 下方小三角形改成淡紫色 */
+body .cookie-speech::after {
+    border-width: 8px;
+    border-top-color: var(--lilac);
+}
