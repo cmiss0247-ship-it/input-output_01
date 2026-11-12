@@ -1,0 +1,309 @@
+
+/* ===== 基本設定 ===== */
+* {
+    box-sizing: border-box;
+}
+
+body.theme-dark {
+    margin: 0;
+    min-height: 100vh;
+    color: #eee5ff;
+    font-family: "Microsoft JhengHei", sans-serif;
+    text-align: center;
+
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        #33204f 0%,
+        #111027 45%,
+        #060713 100%
+    );
+
+    background-attachment: fixed;
+}
+
+/* ===== 主要版面 ===== */
+.page {
+    width: min(96%, 1100px);
+    margin: auto;
+    padding: 45px 0 150px;
+}
+
+/* ===== 標題 ===== */
+.hero {
+    padding: 20px 10px 35px;
+}
+
+.eyebrow {
+    color: #cbb2ff;
+    letter-spacing: 5px;
+    font-size: 13px;
+}
+
+h1 {
+    color: #f2e6ff;
+    font-size: clamp(26px, 4vw, 42px);
+    text-shadow: 0 0 20px #b38aff;
+    margin: 15px 0;
+}
+
+.subtitle {
+    color: #c8b4e6;
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+/* ===== 月份切換 ===== */
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 20px auto 30px;
+}
+
+.nav h2 {
+    min-width: 190px;
+    color: #e6d5ff;
+    font-size: 25px;
+}
+
+a {
+    display: inline-block;
+    color: #f0e3ff;
+    background: #31214e;
+    border: 1px solid #9b7aca;
+    border-radius: 12px;
+    padding: 11px 18px;
+    text-decoration: none;
+    box-shadow: 0 0 12px #7f53bb55;
+    transition: 0.25s;
+}
+
+a:hover {
+    background: #67458e;
+    box-shadow: 0 0 22px #a981ff;
+}
+
+.nav-disabled {
+    padding: 11px 18px;
+    opacity: 0.35;
+}
+
+/* ===== 月曆外框 ===== */
+.calendar-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #9b77cb;
+    border-radius: 14px;
+    box-shadow: 0 0 28px #8658d655;
+}
+
+/* ===== 月曆表格 ===== */
+.calendar {
+    width: 100%;
+    min-width: 490px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #0c071f;
+}
+
+.calendar th {
+    height: 45px;
+    color: #d9c5ff;
+    border: 1px solid #3c305a;
+    background: #1b1232;
+}
+
+.calendar th.weekend {
+    color: #ffadd9;
+}
+
+.calendar td {
+    height: 115px;
+    border: 1px solid #3c305a;
+    text-align: center;
+    vertical-align: middle;
+    background: #100b26;
+    transition: background 0.25s;
+}
+
+.calendar td:hover {
+    background: #2d1b4c;
+}
+
+.calendar td.empty {
+    background: #090616;
+}
+
+/* ===== 月亮 ===== */
+.moon {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin: auto;
+    border-radius: 50%;
+    overflow: hidden;
+
+    background: radial-gradient(
+        circle at 35% 30%,
+        #f5f0ff,
+        #a69bc6 65%,
+        #5c5279
+    );
+
+    box-shadow: 0 0 12px #ad8de955;
+}
+
+/* 月亮紋理 */
+.moon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 35%,
+            #5b517044 0 10%,
+            transparent 11%
+        ),
+        radial-gradient(
+            circle at 65% 60%,
+            #55496655 0 14%,
+            transparent 15%
+        ),
+        radial-gradient(
+            circle at 42% 75%,
+            #6d608044 0 8%,
+            transparent 9%
+        );
+}
+
+/* 月亮暗面 */
+.moon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #090718;
+}
+
+/* ===== 八種月相 ===== */
+.phase-0::after {
+    inset: 0;
+}
+
+.phase-1::after {
+    inset: 0;
+    box-shadow: inset -13px 0 0 #b9afd5;
+}
+
+.phase-2::after {
+    left: 0;
+    right: 50%;
+    border-radius: 50% 0 0 50%;
+}
+
+.phase-3::after {
+    left: 0;
+    right: 18%;
+    border-radius: 50% 25% 25% 50%;
+    transform: translateX(-35%);
+}
+
+.phase-4::after {
+    display: none;
+}
+
+.phase-5::after {
+    left: 18%;
+    right: 0;
+    border-radius: 25% 50% 50% 25%;
+    transform: translateX(35%);
+}
+
+.phase-6::after {
+    left: 50%;
+    right: 0;
+    border-radius: 0 50% 50% 0;
+}
+
+.phase-7::after {
+    inset: 0;
+    box-shadow: inset 13px 0 0 #b9afd5;
+}
+
+/* ===== 日期 ===== */
+.day-number {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 24px;
+    text-shadow: 0 2px 5px #000;
+}
+
+/* 週末 */
+.calendar td.weekend .day-number {
+    color: #ffd1eb;
+}
+
+/* 今天 */
+.calendar td.today {
+    background: #261844;
+    outline: 2px solid #bc9aff;
+    outline-offset: -2px;
+}
+
+.calendar td.today .moon {
+    box-shadow:
+        0 0 0 3px #a88cff,
+        0 0 22px #a981ff,
+        0 0 38px #7851e0;
+}
+
+/* ===== 底部 ===== */
+.moon-note {
+    color: #a99ac5;
+    font-size: 12px;
+    margin: 22px 0;
+}
+
+footer {
+    margin-top: 25px;
+}
+
+/* ===== 手機版 ===== */
+@media (max-width: 650px) {
+    .page {
+        padding-top: 20px;
+    }
+
+    .nav {
+        gap: 10px;
+    }
+
+    .nav h2 {
+        width: 100%;
+        order: -1;
+    }
+
+    .calendar td {
+        height: 75px;
+    }
+
+    .moon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .day-number {
+        font-size: 17px;
+    }
+}

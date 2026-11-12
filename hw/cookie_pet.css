@@ -1,0 +1,133 @@
+
+/* ===== Cookie 網頁寵物 ===== */
+
+#cookie-pet {
+    position: fixed;
+    left: 0;
+    bottom: 12px;
+
+    width: 120px;
+    height: 130px;
+
+    z-index: 9999;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+/* Cookie 圖片 */
+#cookie-image {
+    display: block;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+
+    image-rendering: pixelated;
+    transform-origin: center bottom;
+    filter: drop-shadow(0 6px 5px #0008);
+}
+
+/* 走路：輕輕上下跳動 */
+#cookie-pet.walking #cookie-image {
+    animation: cookie-walk 0.3s infinite alternate;
+}
+
+@keyframes cookie-walk {
+    from {
+        translate: 0 0;
+    }
+
+    to {
+        translate: 0 -5px;
+    }
+}
+
+/* 休息：使用趴下圖片，輕微呼吸 */
+#cookie-pet.resting #cookie-image {
+    animation: cookie-rest 2s ease-in-out infinite;
+}
+
+@keyframes cookie-rest {
+    0%, 100% {
+        translate: 0 0;
+        scale: 1 1;
+    }
+
+    50% {
+        translate: 0 2px;
+        scale: 1.01 0.98;
+    }
+}
+
+/* 面向左邊 */
+#cookie-pet.facing-left #cookie-image {
+    transform: scaleX(-1);
+}
+
+/* ===== 說話泡泡 ===== */
+.cookie-speech {
+    position: absolute;
+    bottom: 125px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 125px;
+    max-width: 190px;
+    padding: 10px 13px;
+
+    background: #fff3e9;
+    color: #57332b;
+    border: 2px solid #a66d5d;
+    border-radius: 15px;
+
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+
+    box-shadow: 0 5px 15px #0005;
+    pointer-events: none;
+}
+
+/* 保持 hidden 屬性有效 */
+.cookie-speech[hidden] {
+    display: none;
+}
+
+/* 泡泡下方小三角形 */
+.cookie-speech::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: 9px solid transparent;
+    border-top-color: #a66d5d;
+}
+
+/* ===== 手機版 ===== */
+@media (max-width: 650px) {
+    #cookie-pet {
+        width: 90px;
+        height: 100px;
+    }
+
+    #cookie-image {
+        width: 90px;
+        height: 90px;
+    }
+
+    .cookie-speech {
+        bottom: 95px;
+        min-width: 110px;
+        font-size: 12px;
+    }
+}
+
+/* 尊重減少動畫設定 */
+@media (prefers-reduced-motion: reduce) {
+    #cookie-pet.walking #cookie-image,
+    #cookie-pet.resting #cookie-image {
+        animation: none;
+    }
+}
