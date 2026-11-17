@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display {
+            display: block;
+
+        }
+
+        .display-inline {
+            display: inline;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- block 換行 大小 -->
+    <!-- inline 不能換行 -->
+    <!-- inline-block 不能換行 可以調整大小 -->
+    <h3>
+        block 換行 大小
+    </h3>
+    <p class="box">
+        Lorem ipsum dolor sit amet.
+    </p>
+    <div class="box">
+        Lorem ipsum dolor sit amet.</div>
+    <br><br>
+    <span class="box">
+        span Lorem ipsum dolor sit amet.
+    </span>
+
+    <span class="display-block box">
+        span Lorem ipsum dolor sit amet.
+    </span>
+
+    <h3>
+        inline 不換行
+    </h3>
+
+    <span class="box">
+        span Lorem ipsum dolor sit amet.
+    </span>
+
+    <span class="display-block box">
+        span Lorem ipsum dolor sit amet.
+    </span>
+
+    <div class="display-inline box">
+        Lorem ipsum dolor sit amet.
+    </div>
+
+    <div class="display-inline box">
+        Lorem ipsum dolor sit amet.
+    </div>
+
+    <h3>
+        inline-block 不換行 可大小
+    </h3>
+
+    <img class="display-block box" src="https://picsum.photos/id/237/200/300">
+    <img class="display-block box" src="https://picsum.photos/id/237/200/300">
+    <input type="display-block box" type="text" name="" id="">
+    <input type="display-block box" type="text" name="" id="">
+</body>
+
+</html>

@@ -10,25 +10,42 @@
             height: 300px;
             background-color: blueviolet;
 
-            background-image: url(https://picsum.photos/id/237/200/300);
-            background-repeat: no-repeat;
-            background-position: 10px 10px;
-            background-position: 10px 10px;
         }
 
-        .box {
-            background-image: url(https://picsum.photos/id/26/200/200);
+        .box>img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .box1 {
+            background-color: lightblue;
+        }
+
+        .box2 {
+            background-color: lightpink;
+            background-image: url('https://picsum.photos/id/20/200/200');
+            background-repeat: repeat;
+        }
+
+        .box3 {
+            background-color: lightgreen;
+            background-image: url('https://picsum.photos/id/21/200/200');
             background-repeat: no-repeat;
-            background-position: 10px 10px;
-            
+
+            /* bg-size cover contain */
+            background-size: cover;
+
         }
     </style>
 </head>
 <body>
-    <div class="box box1"></div>
-    <br>
+    <div class="box box1">
+        <img src="https://picsum.photos/id/21/200/200" alt="">
+    </div>
     <br>
     <div class="box box2"></div>
+
+    <div class="box box3"></div>
     
 </body>
 </html>
