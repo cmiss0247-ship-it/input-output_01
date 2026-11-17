@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #link {
+            color: black;
+            text-decoration: none;
+            position: relative;
+
+        }
+
+        /* #link::before {
+            content: "456";
+        } */
+
+        #link::after {
+            content: "";
+            width: 20px;
+            height: 2px;
+            background: purple;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 2s;
+        }
+        #link:hover::after {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <a id="link" href="">home</a>
+    
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #title {
+            text-align: center;
+        }
+
+        #container {
+            overflow: hidden;
+            width: 801px;
+            margin: auto;
+        }
+
+        .card {
+            width: 250px;
+            float: left;
+            margin: 10px;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px;
+            /* filter: blur(); */
+            box-shadow: 5px 5px 5px 1px black;
+            position: relative;
+            box-sizing: border-box;
+
+            img {
+                width: 100%;
+            }
+
+            .card-img {
+                width: 100%;
+            }
+
+            .card-ribbon {
+                position: absolute;
+                top: -12px;
+                left: -11px;
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">雙十一特賣</h1>
+    <div id="container">
+        <div class="card">
+            <img class="card-img" src="https://picsum.photos/300/200" alt="">
+            <h2>商品</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <img class="card-ribbon" src="./ribbon.png" alt="">
+        </div>
+    </div>
+</body>
+
+</html>

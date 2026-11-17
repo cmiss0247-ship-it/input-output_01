@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background: gray;
+    }
+    #static {
+      /* 預設值，靜態，無法調整位置 */
+      position: static;
+      /* 無效 */
+      left: 100px;
+    }
+    #relative {
+      /* 相對於原本的位置偏移 */
+      position: relative;
+      /* 距離原本的位置左邊 300px */
+      left: 300px;
+      /* 距離原本的位置上面 200px */
+      top: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="static">static</div>
+  <div id="relative">relative</div>
+</body>
+</html>

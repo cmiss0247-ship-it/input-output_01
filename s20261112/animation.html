@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            background: rgb(207, 133, 230);
+            /* animation: 名稱 時間 時間函數 開始延遲 播放次數 動畫方向 完成模式
+        時間函數: linear(線性)、ease
+        動畫方向: normal(→)、reverse(←)、alternate(→ ←)、alternate-reverse(← →)
+        完成模式: none(播放完變回原本樣式)、forwards(播放完停在最後一幀)、backwards(開始前變成第一幀)、both(forwards + backwards) */
+
+            animation: move 3s infinite alternate;
+        }
+
+        #box2 {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            background: silver;
+            
+
+            animation: move 10s infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: 0px;
+            }
+
+            100% {
+                left: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+</body>
+
+</html>

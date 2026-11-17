@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background: gray;
+      border: 1px solid black;
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    #content {
+      overflow: hidden;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="box left"></div>
+  <div class="box left"></div>
+  <!-- 後面的文字會受到前面的 float 影響，圍繞 float 元素 -->
+  <p>注意重要以往支持同步優點交友究竟材料予以隨後得分不會，經營許可證，客服請教表示變得轎車請大家原創無論更新作者認定各個，裡面自然，平衡參與前後法規方法只是問題，背景公告，個人關於球員電池等方面是的期待經營許可證民國眼光國務院大會，品牌神話自我自行作家一定怎。</p>
+  <div class="box right"></div>
+  <div class="box right"></div>
+  <!-- 如果不想要後面的文字受到影響的話，使用 clear 清除 -->
+  <p style="clear: both">注意重要以往支持同步優點交友究竟材料予以隨後得分不會，經營許可證，客服請教表示變得轎車請大家原創無論更新作者認定各個，裡面自然，平衡參與前後法規方法只是問題，背景公告，個人關於球員電池等方面是的期待經營許可證民國眼光國務院大會，品牌神話自我自行作家一定怎。</p>
+  <!-- 
+    float 會導致元素脫離正常的排版，導致外層的高度變成 0
+    在外層加上 overflow: hidden 可以修正這個問題
+  -->
+  <div id="content">
+    <div class="box left"></div>
+    <div class="box left"></div>
+  </div> 
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 5000px;
+        }
+
+        #fixed {
+            position: fixed;
+            /*以瀏覽器視窗為基準，不會隨便頁面捲動 */
+            right: 10px;
+            bottom: 10px;
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+
+        #sticky {
+            position: sticky;
+            top: 10px;
+            width: 100px;
+            height: 100px;
+            background: darkcyan;
+        }
+    </style>
+</head>
+
+<body>
+    <p>白話解釋
+        設定 div 盒子寬、高各 300px，黑色實線邊框 2px，裡面留出空間。
+
+        語法重點
+        - padding: 10px 20px 30px 40px;：內距依序是上、右、下、左。
+        - box-sizing: border-box;：300px 已包含內距和邊框。
+        - /* ... */：註解，不會執行。
+    </p>
+    <div id="fixed">fixed</div>
+    <div id="sticky">sticky</div>
+
+</body>
+
+</html>

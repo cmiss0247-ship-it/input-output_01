@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #out {
+      width: 500px;
+      height: 500px;
+      background: black;
+      position: relative;
+      left: 300px;
+    }
+    #in {
+      width: 100px;
+      height: 100px;
+      background: gray;
+      /*
+        相對於最近的上層且有 position relative 的元素偏移
+        都沒有則是 body
+      */
+      position: absolute;
+      left: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="out">
+    <div id="in"></div>
+  </div>
+</body>
+</html>
