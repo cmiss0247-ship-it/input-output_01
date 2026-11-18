@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: left;
+        }
+
+        .clear-both {
+            clear: both;
+            /* clear: both;
+             clear: right; */
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: black;
+            margin-left: 30px;
+            margin-right: 30px;
+
+            /* float: right; */
+
+
+
+            position: relative;
+
+
+            height: 25vh;
+        }
+
+        .box21 {
+            width: 300px;
+            height: 400px;
+            background-color: darkkhaki;
+        }
+
+        .box22 {
+            width: 300px;
+            height: 400px;
+            background-color: rgb(107, 189, 141);
+        }
+
+        .box-in-right-top {
+            width: 50px;
+            height: 50px;
+            background-color: grey;
+
+            position: absolute;
+            top: 0px;
+            right: 0px
+        }
+
+        .box-in-right-bottom {
+            width: 50px;
+            height: 50px;
+            background-color: burlywood;
+
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clear-both">
+        <div class="box box21 float-left">
+            <div class="box-in-right-top">
+
+            </div>
+            <div class="box-in-right-bottom">
+
+            </div>
+
+        </div>
+        <div class="box box22 float-right">
+            <div class="box-in-right-top">
+
+            </div>
+            <div class="box-in-right-bottom">
+
+            </div>
+        </div>
+          <div class="box box21 float-left">
+            <div class="box-in-right-top">
+
+            </div>
+            <div class="box-in-right-bottom">
+
+            </div>
+        </div>
+        <div class="box box22 float-right">
+            <div class="box-in-right-top">
+
+            </div>
+            <div class="box-in-right-bottom">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    </div>    
+    
+</body>
+</html>

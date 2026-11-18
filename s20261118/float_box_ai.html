@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雲層上的貓咪</title>
+    <STYLE>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f4ff;
+            color: #302445;
+            font-family: sans-serif;
+        }
+
+        nav {
+            padding: 12px 24px;
+            text-align: right;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 8px 14px;
+            color: #302445;
+            text-decoration: none;
+        }
+
+        .hero {
+            min-height: 55vh;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #dbe9ff;
+            background-image: url(./images/);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero p {
+            display: inline-block;
+            padding: 8px 18px;
+            background-color: #fff;
+            border-radius: 24px;
+        }
+
+        .cat {
+            font-size: 68px;
+        }
+
+        .gallery {
+            overflow-x: auto;
+        }
+
+        .photo-strip {
+            width: 150%;
+        }
+
+        .photo-strip img {
+            float: left;
+            width: calc(100% / 6);
+            height: 150px;
+            padding: 6px;
+            background-color: #e7dcf8;
+            object-fit: cover;
+        }
+
+        .box {
+            float: left;
+            min-height: 25vh;
+            padding: 16px;
+            border: 4px solid #f8f4ff;
+            background-color: #e7dcf8;
+        }
+
+        #row2 .box {
+            width: 50%;
+        }
+
+        #row3 .box {
+            width: calc(100% / 3);
+        }
+
+        #row4 .box {
+            width: 25%;
+        }
+
+        .clear-both {
+            clear: both;
+        }
+    </STYLE>
+</head>
+
+<body>
+    <nav aria-label="圖鑑導覽"></nav>
+    <ul>
+        <li><a href="#row1">1</a></li>
+        <li><a href="#row2">2</a></li>
+        <li><a href="#row3">3</a></li>
+        <li><a href="#row4">4</a></li>
+    </ul>
+    </nav>
+
+    <section id="row1">
+        <div class="hero">
+            <h1>貓咪飄起來</h1>
+            <div class="cat">✧ 🐈‍⬛ ✧</div>
+            <p>今天，跟著黑貓去雲上逛逛。</p>
+        </div>
+
+        <h2>貓咪相簿</h2>
+        <div class="gallery">
+            <div class="photo-strip">
+                <img src="./images/cat1.jpg" alt="英國短毛貓">
+                <img src="./images/cat2.jpg" alt="布偶貓">
+                <img src="./images/cat3.jpg" alt="緬因貓">
+                <img src="./images/cat4.jpg" alt="暹羅貓">
+                <img src="./images/cat5.jpg" alt="波斯貓">
+                <img src="./images/cat6.jpg" alt="俄羅斯藍貓">
+                <div class="clear-both"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="row2">
+        <div class="box">主打照片｜英國短毛貓</div>
+        <div class="box">品種介紹｜圓臉，毛短而濃密</div>
+        <div class="clear-both"></div>
+    </section>
+
+    <section id="row3">
+        <div class="box">布偶貓</div>
+        <div class="box">緬因貓</div>
+        <div class="box">暹羅貓</div>
+        <div class="clear-both"></div>
+    </section>
+
+    <section id="row4">
+        <div class="box">英國短毛貓</div>
+        <div class="box">布偶貓</div>
+        <div class="box">緬因貓</div>
+        <div class="box">暹羅貓</div>
+        <div class="clear-both"></div>
+    </section>
+
+</body>
+
+</html>

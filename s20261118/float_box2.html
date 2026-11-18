@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float 排版練習</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f6f3ff;
+        }
+
+        /* 導覽列靠右橫排，往下捲時留在畫面上方 */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 8px 16px;
+            background-color: #f6f3ff;
+            text-align: right;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 8px 12px;
+            color: #32165d;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background-color: #e7d7ff;
+        }
+
+        /* 點導覽跳到該排時，留出導覽列的高度 */
+        section {
+            scroll-margin-top: 56px;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        /* 放在每排最後一格後面，讓下一排從下面開始 */
+        .clear-both {
+            clear: both;
+        }
+
+        .box {
+            height: 25vh;
+        }
+
+        .box11 { width: 100%; background-color: #6f00d6; }
+
+        .box21 { width: 50%; background-color: #4f0099; }
+        .box22 { width: 50%; background-color: #320061; }
+
+        /* 用 100% 除以 3，三格一起貼齊整排 */
+        .box31 { width: calc(100% / 3); background-color: #1e003a; }
+        .box32 { width: calc(100% / 3); background-color: #28004d; }
+        .box33 { width: calc(100% / 3); background-color: #000; }
+
+        .box41, .box42, .box43, .box44 { width: 25%; }
+        .box41 { background-color: #c2a4fa; }
+        .box42 { background-color: #9c75e6; }
+        .box43 { background-color: #724abf; }
+        .box44 { background-color: #48258c; }
+
+        /* 四張卡片置中。中間兩張比較高，兩側比較低 */
+        .gallery {
+            padding: 48px 0 56px;
+            text-align: center;
+            background-color: #f6f3ff;
+        }
+
+        .cat-card {
+            position: relative;
+            display: inline-block;
+            width: min(19%, 155px);
+            vertical-align: top;
+        }
+
+        .cat-card:nth-child(1) {
+            --angle: -20deg;
+            margin-top: 28px;
+        }
+
+        .cat-card:nth-child(2) {
+            --angle: -8deg;
+        }
+
+        .cat-card:nth-child(3) {
+            --angle: 8deg;
+        }
+
+        .cat-card:nth-child(4) {
+            --angle: 20deg;
+            margin-top: 28px;
+        }
+
+        .cat-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border: 4px solid white;
+            border-radius: 14px;
+            box-shadow: 0 6px 14px #32165d33;
+
+            /* 外層卡片固定接收滑鼠事件，只有裡面的照片移動 */
+            pointer-events: none;
+            transform: translate(var(--move-x, 0px), var(--move-y, 0px))
+                       rotate(var(--angle));
+            transition: transform 0.18s ease-out;
+        }
+
+        @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+            .cat-card:hover {
+                z-index: 1; /* 放大的照片疊在其他照片前面 */
+            }
+
+            .cat-card:hover img {
+                transform: translate(var(--move-x, 0px), var(--move-y, 0px))
+                           rotate(var(--angle)) scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- href 的 #row2 會跳到同一頁 id="row2" 的地方 -->
+    <nav aria-label="排版導覽">
+        <ul>
+            <li><a href="#row1">1</a></li>
+            <li><a href="#row2">2</a></li>
+            <li><a href="#row3">3</a></li>
+            <li><a href="#row4">4</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 第一排：一格色塊，下面接扇形貓咪相簿 -->
+        <section id="row1">
+            <div class="box box11"></div>
+
+            <div class="gallery">
+                <div class="cat-card">
+                    <img src="" alt="1">
+                </div>
+                <div class="cat-card">
+                    <img src="" alt="2">
+                </div>
+                <div class="cat-card">
+                    <img src="" alt="3">
+                </div>
+                <div class="cat-card">
+                    <img src="" alt="4">
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二排：兩格，各佔一半 -->
+        <section id="row2">
+            <div class="box box21 float-left"></div>
+            <div class="box box22 float-left"></div>
+            <div class="clear-both"></div>
+        </section>
+
+        <!-- 第三排：三格，各佔三分之一 -->
+        <section id="row3">
+            <div class="box box31 float-left"></div>
+            <div class="box box32 float-left"></div>
+            <div class="box box33 float-left"></div>
+            <div class="clear-both"></div>
+        </section>
+
+        <!-- 第四排：四格，各佔四分之一 -->
+        <section id="row4">
+            <div class="box box41 float-left"></div>
+            <div class="box box42 float-left"></div>
+            <div class="box box43 float-left"></div>
+            <div class="box box44 float-left"></div>
+            <div class="clear-both"></div>
+        </section>
+    </main>
+
+    <script>
+        const cards = document.querySelectorAll(".cat-card");
+
+        cards.forEach(function (card) {
+            card.addEventListener("pointermove", function (event) {
+                if (event.pointerType !== "mouse") return;
+
+                const bounds = card.getBoundingClientRect();
+
+                // 游標減掉卡片中心的位置，算出往左、右、上、下的距離
+                const x = event.clientX - (bounds.left + bounds.width / 2);
+                const y = event.clientY - (bounds.top + bounds.height / 2);
+
+                // 只移動距離的 15%，讓照片微微跟著滑鼠走
+                card.style.setProperty("--move-x", `${x * 0.15}px`);
+                card.style.setProperty("--move-y", `${y * 0.15}px`);
+            });
+
+            // 滑鼠移開後，把位移歸零，照片回到原位
+            card.addEventListener("pointerleave", function () {
+                card.style.removeProperty("--move-x");
+                card.style.removeProperty("--move-y");
+            });
+        });
+    </script>
+</body>
+</html>

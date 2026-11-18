@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>當我是一隻貓｜貓咪品種圖鑑</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            isolation: isolate;
+            color: #203b56;
+            background-color: #e9edff;
+            font: 1rem/1.65 "Microsoft JhengHei", sans-serif;
+        }
+
+        /* 整頁共用同一片 CSS 雲層 */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                linear-gradient(to top, #fff 0%, #ffffff00 24%),
+                radial-gradient(ellipse 32% 22% at 4% 76%, #fff 28%, #ffffff00 76%),
+                radial-gradient(ellipse 26% 18% at 28% 86%, #fff 32%, #ffffff00 78%),
+                radial-gradient(ellipse 30% 23% at 94% 72%, #fff 24%, #ffffff00 76%),
+                radial-gradient(ellipse 27% 16% at 72% 91%, #fff 30%, #ffffff00 80%),
+                linear-gradient(155deg, #d5ebff 0%, #e9edff 48%, #f1e5fa 76%, #fff 100%);
+        }
+
+        /* 毛玻璃：半透明底色加上背景模糊 */
+        .glass {
+            border: 1px solid #ffffffdd;
+            background-color: #f7fbffee;
+            box-shadow: 0 8px 24px #466b9322;
+        }
+
+        @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+            .glass {
+                background-color: #f7fbff91;
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+            }
+        }
+
+        /* 導覽置中，捲動時黏在頁面上緣 */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px clamp(4px, 2vw, 24px);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            display: block;
+            padding: 8px clamp(5px, 1.3vw, 16px);
+            border-radius: 24px;
+            color: inherit;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a:hover,
+        nav a:focus-visible,
+        .back-top:hover,
+        .back-top:focus-visible {
+            background-color: white;
+        }
+
+        section[id] {
+            scroll-margin-top: 72px;
+        }
+
+        .hero {
+            min-height: calc(100vh - 60px);
+            min-height: calc(100svh - 60px);
+            padding: clamp(36px, 7vh, 80px) 18px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: #254670;
+            font-size: clamp(2.5rem, 8vw, 7rem);
+            line-height: 1.15;
+            text-shadow: 0 4px white, 0 9px 22px #9fb9d97a;
+        }
+
+        h1 span {
+            display: inline-block;
+            transform: rotate(-5deg);
+        }
+
+        h1 span + span {
+            transform: translateY(0.12em) rotate(5deg);
+        }
+
+        .hero-stage {
+            display: grid;
+            grid-template-columns: 1fr minmax(0, 2.5fr) 1fr;
+            align-items: center;
+            gap: 14px;
+            max-width: 1150px;
+            margin: clamp(30px, 6vh, 65px) auto 0;
+        }
+
+        .floating-cat {
+            display: block;
+            width: 100%;
+            max-width: 570px;
+            margin: auto;
+            filter: drop-shadow(0 16px 22px #284e7340);
+            animation: cat-float 4.8s ease-in-out infinite;
+        }
+
+        /* 黑貓在動畫中間往上飄，再回到原位 */
+        @keyframes cat-float {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-22px) rotate(3deg); }
+        }
+
+        .cloud {
+            padding: 15px 12px;
+            border-radius: 36px;
+            background-color: #ffffffeb;
+            box-shadow: 0 8px 28px #8196c52e;
+            animation: cloud-float 5s ease-in-out infinite;
+        }
+
+        .cloud-right { animation-delay: -2s; }
+        .cloud p { margin: 0; animation: reveal 0.85s ease-out both; }
+        .cloud-right p { animation-delay: 0.3s; }
+
+        @keyframes cloud-float {
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
+            width: min(1200px, 100%);
+            margin: auto;
+            padding: 32px clamp(14px, 4vw, 35px);
+        }
+
+        .content h2 {
+            margin-top: 0;
+        }
+
+        /* 四張照片用不同角度排成扇形 */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 24px);
+            padding-top: 56px;
+            padding-bottom: 68px;
+        }
+
+        .cat-card {
+            position: relative;
+            align-self: flex-start;
+            width: min(21%, 232px);
+            padding: 5px;
+            border-radius: 20px;
+            transform: rotate(var(--angle));
+        }
+
+        .cat-card:nth-child(1) { --angle: -16deg; margin-top: 28px; }
+        .cat-card:nth-child(2) { --angle: -5deg; }
+        .cat-card:nth-child(3) { --angle: 5deg; }
+        .cat-card:nth-child(4) { --angle: 16deg; margin-top: 28px; }
+
+        .cat-card > img,
+        .box > img,
+        .breed-photo {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        /* 外框接收游標事件，只有照片移動 */
+        .cat-card > img {
+            pointer-events: none;
+            transition: transform 0.18s ease-out;
+        }
+
+        @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+            .cat-card:hover {
+                z-index: 1;
+            }
+
+            .cat-card:hover > img {
+                transform: translate(var(--x, 0px), var(--y, 0px)) scale(1.2);
+            }
+        }
+
+        /* 作業的兩欄和三欄，使用 float 排列 */
+        .box {
+            float: left;
+            padding: clamp(8px, 1.4vw, 16px);
+            border-radius: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .two .box { width: 50%; }
+        .three .box { width: calc(100% / 3); }
+        .clear-both { clear: both; }
+
+        #row2 h2 {
+            margin-bottom: 30px;
+        }
+
+        .breed-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 30px 14px;
+            padding-top: 18px;
+        }
+
+        .breed-card {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        /* 為每種貓指定相框紋理 */
+        .fur-british { --fur: url("./images/fur-british.png"); }
+        .fur-ragdoll { --fur: url("./images/fur-ragdoll.png"); }
+        .fur-maine   { --fur: url("./images/fur-maine.png"); }
+        .fur-siamese { --fur: url("./images/fur-siamese.png"); }
+
+        /* 紋理放在整張卡上，從照片包到介紹文字 */
+        .fur-frame {
+            --frame-width: 8px;
+            position: relative;
+            isolation: isolate;
+            padding: calc(var(--frame-width) + 4px);
+            border-radius: 22px;
+            background-color: #abb9c8;
+            background-image: linear-gradient(#ffffff1a, #ffffff1a), var(--fur);
+            background-position: center;
+            background-size: cover;
+            box-shadow: 0 8px 24px #30496529;
+        }
+
+        /* 內側鋪霧白底，外面留下 8px 的毛色邊框 */
+        .fur-frame::after {
+            content: "";
+            position: absolute;
+            inset: var(--frame-width);
+            z-index: -1;
+            border: 1px solid #ffffffc9;
+            border-radius: 15px;
+            background-color: #f0f7fff0;
+            pointer-events: none;
+        }
+
+        /* 每個毛色相框都使用同一顆小灰貓頭，貼在卡片左上角 */
+        .fur-frame::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 12px;
+            z-index: 3;
+            width: clamp(36px, 5vw, 46px);
+            aspect-ratio: 1;
+            background: url("./images/surprised-cat.png") center / contain no-repeat;
+            filter: drop-shadow(0 3px 4px #263b5540);
+            pointer-events: none;
+        }
+
+        /* 相框內部定位，讓小標貼在照片下緣 */
+        .portrait-frame {
+            position: relative;
+            margin: 0;
+            padding: 6px;
+            border-radius: 17px;
+        }
+
+        .photo-labels {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            left: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .photo-label {
+            max-width: 100%;
+            padding: 4px 9px;
+            border-radius: 16px;
+            background-color: #edf7ffd9;
+            color: #183d63;
+            font-size: 0.72rem;
+            font-weight: bold;
+            line-height: 1.35;
+        }
+
+        .breed-details { padding: 6px; }
+        .breed-details h3 { margin: 5px 0; }
+        .atlas-legend, .friendliness, .health-note { font-size: 0.86rem; }
+
+        .paws {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .paws-empty { opacity: 0.28; }
+
+        .health-note {
+            margin-bottom: 4px;
+            padding-top: 8px;
+            border-top: 1px solid #ffffffdd;
+        }
+
+        .health-note a { color: #184e78; }
+        #row4 { padding-bottom: 100px; }
+
+        /* 回頁首按鈕用 fixed 固定在視窗右下角 */
+        .back-top {
+            position: fixed;
+            right: 15px;
+            bottom: max(14px, env(safe-area-inset-bottom));
+            z-index: 12;
+            display: grid;
+            justify-items: center;
+            width: 66px;
+            padding: 4px 4px 7px;
+            border-radius: 18px;
+            color: #173f65;
+            font-size: 0.75rem;
+            font-weight: bold;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .back-top img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 700px) {
+            .hero { min-height: 0; }
+            .hero-stage { grid-template-columns: 1fr 1fr; }
+
+            .floating-cat {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                max-width: 320px;
+            }
+
+            .cloud { font-size: 0.85rem; }
+            .gallery { flex-wrap: wrap; gap: 20px; }
+            .cat-card { width: min(38%, 170px); }
+            .cat-card:nth-child(1), .cat-card:nth-child(4) { margin-top: 0; }
+            .breed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-cat, .cloud, .cloud p { animation: none; }
+            .cat-card > img { transition: none; }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <nav class="glass" aria-label="圖鑑導覽">
+        <ul>
+            <li><a href="#row1">雲上首頁</a></li>
+            <li><a href="#row2">認識英短</a></li>
+            <li><a href="#row3">三種貓咪</a></li>
+            <li><a href="#row4">品種圖鑑</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 第一區：漂浮黑貓與扇形相簿 -->
+        <section id="row1">
+            <div class="hero">
+                <h1><span>當我</span> <span>是一隻貓🐾</span></h1>
+
+                <div class="hero-stage">
+                    <div class="cloud">
+                        <p>英短的圓臉自帶包子模式，找不到關閉按鈕。</p>
+                    </div>
+
+                    <img class="floating-cat" src="./images/floating-cat.png"
+                         alt="一隻金眼黑貓在白雲之間漂浮">
+
+                    <div class="cloud cloud-right">
+                        <p>緬因貓自帶毛毛圍巾，梳毛時才知道這件有多厚。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery content">
+                <div class="cat-card glass"><img src="./images/cat1.png" alt="英國短毛貓"></div>
+                <div class="cat-card glass"><img src="./images/cat2.png" alt="布偶貓"></div>
+                <div class="cat-card glass"><img src="./images/cat3.png" alt="緬因貓"></div>
+                <div class="cat-card glass"><img src="./images/cat4.png" alt="暹羅貓"></div>
+            </div>
+        </section>
+
+        <!-- 第二區：左邊是英短毛色相框，右邊是介紹 -->
+        <section id="row2" class="content two">
+            <h2>認識英國短毛貓</h2>
+
+            <div class="box glass fur-frame fur-british">
+                <figure class="portrait-frame glass">
+                    <img class="breed-photo" src="./images/cat1.png"
+                         alt="藍灰短毛、銅色眼睛的英國短毛貓">
+                </figure>
+            </div>
+
+            <div class="box glass">
+                <h3>圓臉配上絨毛外套</h3>
+                <p>英國短毛貓的頭和眼睛偏圓，身形結實，短毛密實，像穿了件絨毛外套。</p>
+                <p>圖中是藍灰色的英短。英短也有其他毛色，可以一起觀察牠的頭形、身形和被毛。</p>
+            </div>
+
+            <div class="clear-both"></div>
+        </section>
+
+        <!-- 第三區：用 float 排出三欄 -->
+        <section id="row3" class="content three">
+            <h2>從臉、耳朵和毛色認識三種貓</h2>
+
+            <article class="box glass">
+                <img src="./images/cat2.png" alt="藍眼、白色倒 V 臉紋的布偶貓">
+                <h3>布偶貓</h3>
+                <p>藍眼睛和柔長的毛很醒目。圖中是雙色花紋，臉部中央的白色像一個倒 V。</p>
+            </article>
+
+            <article class="box glass">
+                <img src="./images/cat3.png" alt="有蓬鬆頸毛的虎斑緬因貓">
+                <h3>緬因貓</h3>
+                <p>牠有偏方的口鼻輪廓和蓬鬆的頸毛。圖中的耳尖毛像兩支小筆刷。</p>
+            </article>
+
+            <article class="box glass">
+                <img src="./images/cat4.png" alt="藍眼睛、深色臉和耳朵的暹羅貓">
+                <h3>暹羅貓</h3>
+                <p>藍眼睛配上淺色身體。臉、耳朵、四腳和尾巴的毛色較深，這種花紋叫重點色。</p>
+            </article>
+
+            <div class="clear-both"></div>
+        </section>
+
+        <!-- 第四區：毛色框包住整張卡，左上角的灰貓頭由 CSS 加入 -->
+        <section id="row4" class="content">
+            <h2>貓咪品種圖鑑</h2>
+            <p class="atlas-legend">親人度依個體而異，健康欄列出可留意的疾病。</p>
+
+            <div class="breed-grid">
+                <article class="breed-card glass fur-frame fur-british">
+                    <figure class="portrait-frame glass">
+                        <img class="breed-photo" src="./images/cat1.png" alt="英國短毛貓" loading="lazy">
+                        <div class="photo-labels">
+                            <span class="photo-label glass">上手難易度｜較易上手</span>
+                            <span class="photo-label glass" aria-hidden="true">PKD1</span>
+                        </div>
+                    </figure>
+
+                    <div class="breed-details">
+                        <h3>英國短毛貓</h3>
+                        <div class="friendliness">
+                            親人度
+                            <span class="paws" role="img" aria-label="示意分數 3／5">
+                                🐾🐾🐾<span class="paws-empty">🐾🐾</span>
+                            </span>
+                        </div>
+                        <p class="health-note">
+                            <strong>遺傳健康提醒</strong><br>
+                            可留意遺傳性多囊腎病（PKD1）。
+                            <a href="https://vgl.vetmed.ucdavis.edu/test/pkd1-cat">來源</a>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="breed-card glass fur-frame fur-ragdoll">
+                    <figure class="portrait-frame glass">
+                        <img class="breed-photo" src="./images/cat2.png" alt="布偶貓" loading="lazy">
+                        <div class="photo-labels">
+                            <span class="photo-label glass">上手難易度｜中等</span>
+                            <span class="photo-label glass" aria-hidden="true">HCM</span>
+                        </div>
+                    </figure>
+
+                    <div class="breed-details">
+                        <h3>布偶貓</h3>
+                        <div class="friendliness">
+                            親人度
+                            <span class="paws" role="img" aria-label="示意分數 4／5">
+                                🐾🐾🐾🐾<span class="paws-empty">🐾</span>
+                            </span>
+                        </div>
+                        <p class="health-note">
+                            <strong>遺傳健康提醒</strong><br>
+                            有已知與肥厚型心肌病（HCM）相關的基因變異。
+                            <a href="https://healthtopics.vetmed.ucdavis.edu/health-topics/hypertrophic-cardiomyopathy">來源</a>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="breed-card glass fur-frame fur-maine">
+                    <figure class="portrait-frame glass">
+                        <img class="breed-photo" src="./images/cat3.png" alt="緬因貓" loading="lazy">
+                        <div class="photo-labels">
+                            <span class="photo-label glass">上手難易度｜較費心</span>
+                            <span class="photo-label glass" aria-hidden="true">HCM</span>
+                        </div>
+                    </figure>
+
+                    <div class="breed-details">
+                        <h3>緬因貓</h3>
+                        <div class="friendliness">
+                            親人度
+                            <span class="paws" role="img" aria-label="示意分數 4／5">
+                                🐾🐾🐾🐾<span class="paws-empty">🐾</span>
+                            </span>
+                        </div>
+                        <p class="health-note">
+                            <strong>遺傳健康提醒</strong><br>
+                            有已知與肥厚型心肌病（HCM）相關的基因變異。
+                            <a href="https://healthtopics.vetmed.ucdavis.edu/health-topics/hypertrophic-cardiomyopathy">來源</a>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="breed-card glass fur-frame fur-siamese">
+                    <figure class="portrait-frame glass">
+                        <img class="breed-photo" src="./images/cat4.png" alt="暹羅貓" loading="lazy">
+                        <div class="photo-labels">
+                            <span class="photo-label glass">上手難易度｜中等</span>
+                            <span class="photo-label glass" aria-hidden="true">PRA</span>
+                        </div>
+                    </figure>
+
+                    <div class="breed-details">
+                        <h3>暹羅貓</h3>
+                        <div class="friendliness">
+                            親人度
+                            <span class="paws" role="img" aria-label="示意分數 4／5">
+                                🐾🐾🐾🐾<span class="paws-empty">🐾</span>
+                            </span>
+                        </div>
+                        <p class="health-note">
+                            <strong>遺傳健康提醒</strong><br>
+                            可留意與 rdAc 變異相關的進行性視網膜萎縮（PRA）。
+                            <a href="https://vgl.vetmed.ucdavis.edu/test/pra-rdac">來源</a>
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- #top 對應最上方的 body id="top" -->
+    <a class="back-top glass" href="#top" aria-label="回到頁首">
+        <img src="./images/top-cat.png" alt="">
+        <span aria-hidden="true">↑ TOP</span>
+    </a>
+
+    <script>
+        const allowMotion = window.matchMedia("(prefers-reduced-motion: no-preference)");
+
+        document.querySelectorAll(".cat-card").forEach(function (card) {
+            card.addEventListener("pointermove", function (event) {
+                if (event.pointerType !== "mouse" || !allowMotion.matches) return;
+
+                const bounds = card.getBoundingClientRect();
+                const x = event.clientX - bounds.left - bounds.width / 2;
+                const y = event.clientY - bounds.top - bounds.height / 2;
+
+                // 照片跟著移動游標離卡片中心距離的 15%
+                card.style.setProperty("--x", (x * 0.15) + "px");
+                card.style.setProperty("--y", (y * 0.15) + "px");
+            });
+
+            // 游標移開後，照片回到原位
+            card.addEventListener("pointerleave", function () {
+                card.style.removeProperty("--x");
+                card.style.removeProperty("--y");
+            });
+        });
+    </script>
+</body>
+</html>
